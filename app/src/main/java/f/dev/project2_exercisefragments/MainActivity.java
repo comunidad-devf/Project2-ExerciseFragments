@@ -5,7 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements StaticFragment.OnPokemonClicked{
+
+    OnPokemonReceived listener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,5 +39,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setListener(OnPokemonReceived listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public void pokemonClicked() {
+        listener.pokemonReceived();
+    }
+
+    public interface OnPokemonReceived {
+
+        void pokemonReceived();
     }
 }
